@@ -7,7 +7,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 
 const statusBarHeight = StatusBar.currentHeight;
-const KEY_GPT = 'sk-proj-9JjboNGiLqEIWQC5aU2lT3BlbkFJeGLjDrOOn7gI5bMMrsxC';
+const KEY_GPT = 'suachave';
 
 export default function App() {
 
@@ -18,7 +18,7 @@ export default function App() {
 
   async function handleGenerate() {
     if (city === "") {
-      Alert.alert("Atenção", "Preencha o nome da cidade!")
+      Alert.alert("Atenção", "Preencha o tipo de música que você gosta!")
       return;
     }
 
@@ -26,7 +26,7 @@ export default function App() {
     setLoading(true);
     Keyboard.dismiss();
 
-    const prompt = `Crie um roteiro para uma viagem de exatos ${days.toFixed(0)} dias na cidade de ${city}, busque por lugares turisticos, lugares mais visitados, seja preciso nos dias de estadia fornecidos e limite o roteiro apenas na cidade fornecida. Forneça apenas em tópicos com nome do local onde ir em cada dia.`
+    const prompt = `Crie um roteiro para uma começar escutar músicas ${days.toFixed(0)} músicas relacionada ao tipo que foi escolhida acima, ou ao artista escolhido${city}, busque pelo tipo de música que foi colocado pelo usuario, tendo várias opções para poder ouvir`
 
     fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -64,21 +64,21 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" translucent={true} backgroundColor="#F1F1F1" />
-      <Text style={styles.heading}>Viaja AI</Text>
+      <Text style={styles.heading}>🎵Empire Mix🎹</Text>
 
       <View style={styles.form}>
-        <Text style={styles.label}>Cidade destino</Text>
+        <Text style={styles.label}>Escolha o Tipo de Música ou Artista de sua Preferência</Text>
         <TextInput
-          placeholder="Ex: Suzano, SP"
+          placeholder="Ex: Música Pop"
           style={styles.input}
           value={city}
           onChangeText={(text) => setCity(text)}
         />
 
-        <Text style={styles.label}>Tempo de estadia: <Text style={styles.days}> {days.toFixed(0)} </Text> dias</Text>
+        <Text style={styles.label}>Digite quantas músicas você pretende acessar <Text style={styles.days}> {days.toFixed(0)} </Text></Text>
         <Slider
           minimumValue={1}
-          maximumValue={7}
+          maximumValue={15}
           minimumTrackTintColor="#009688"
           maximumTrackTintColor="#000000"
           value={days}
@@ -87,21 +87,21 @@ export default function App() {
       </View>
 
       <Pressable style={styles.button} onPress={handleGenerate}>
-        <Text style={styles.buttonText}>Gerar roteiro</Text>
+        <Text style={styles.buttonText}>Gerar Opção Musical</Text>
         <MaterialIcons name="travel-explore" size={24} color="#FFF" />
       </Pressable>
 
       <ScrollView contentContainerStyle={{ paddingBottom: 24, marginTop: 4, }} style={styles.containerScroll} showsVerticalScrollIndicator={false} >
         {loading && (
           <View style={styles.content}>
-            <Text style={styles.title}>Carregando roteiro...</Text>
+            <Text style={styles.title}>Carregando opções...</Text>
             <ActivityIndicator color="#000" size="large" />
           </View>
         )}
 
         {travel && (
           <View style={styles.content}>
-            <Text style={styles.title}>Roteiro da viagem 👇</Text>
+            <Text style={styles.title}>Opções de Músicas 🎵</Text>
             <Text style={{ lineHeight: 24, }}>{travel}</Text>
           </View>
         )}
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f1f1f1',
     alignItems: 'center',
     paddingTop: 20,
+    
   },
   heading: {
     fontSize: 32,
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F1f1f1'
   },
   button: {
-    backgroundColor: '#FF5656',
+    backgroundColor: '#0000ff',
     width: '90%',
     borderRadius: 8,
     flexDirection: 'row',

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ViajaAI",
-    "slug": "ViajaAI",
+    "name": "Empire Mix",
+    "slug": "EmpireMix",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,6 +23,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "25316212-bd22-4cdc-9276-a020971f593a"
+      }
     }
   }
 }
